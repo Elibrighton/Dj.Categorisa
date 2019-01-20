@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SongHandlerInterface;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,21 +27,22 @@ namespace Dj.Categorisa.Models
         private bool _isGenreChillSelected;
         private bool _isGenreDanceSelected;
         private bool _isGenreGirlPowerSelected;
+        private bool _isGenreCountrySelected;
+        private bool _isGenreFunkSelected;
+        private ISongHandler _songHandler;
 
-        public CategorisaModel()
+        public CategorisaModel(ISongHandler songHandler)
         {
+            _songHandler = songHandler;
             IsStatusUnprocessedChecked = true;
             IsTypeRemixChecked = true;
-            LibraryPath = BaseLibraryPath;
-            _statusPath = string.Empty;
-            _typePath = string.Empty;
-            _genrePath = string.Empty;
+            Reset();
             UpdateLibraryPath();
         }
 
         internal void UpdateGenrePath()
         {
-            if(IsGenreRnbSelected)
+            if (IsGenreRnbSelected)
             {
                 _genrePath = "RnB";
             }
@@ -71,16 +74,42 @@ namespace Dj.Categorisa.Models
             {
                 _genrePath = "GirlPower";
             }
+            else if (IsGenreCountrySelected)
+            {
+                _genrePath = "Country";
+            }
+            else if (IsGenreFunkSelected)
+            {
+                _genrePath = "Funk";
+            }
         }
 
         internal void UpdateStatusPath()
         {
             _statusPath = IsStatusUnprocessedChecked ? "Unprocessed" : "Processed";
+
+            if (IsPersonalFavouriteChecked)
+            {
+                _statusPath += string.Concat(@"\", "Personal favourite");
+            }
         }
 
         internal void UpdateTypePath()
         {
             _typePath = IsTypeRemixChecked ? "Remix" : "Original";
+        }
+
+        public void Reset()
+        {
+            LibraryPath = BaseLibraryPath;
+            _statusPath = string.Empty;
+            _typePath = string.Empty;
+            _genrePath = string.Empty;
+        }
+
+        public bool Copy()
+        {
+            return _songHandler.Copy(SongPath, LibraryPath);
         }
 
         public void UpdateLibraryPath()
@@ -89,7 +118,11 @@ namespace Dj.Categorisa.Models
             UpdateTypePath();
             UpdateGenrePath();
 
-            if (!string.IsNullOrEmpty(_statusPath) && !string.IsNullOrEmpty(_typePath) && !string.IsNullOrEmpty(_genrePath))
+            if (IsPersonalFavouriteChecked && !string.IsNullOrEmpty(_statusPath))
+            {
+                LibraryPath = string.Concat(BaseLibraryPath, @"\", _statusPath, @"\");
+            }
+            else if (!string.IsNullOrEmpty(_statusPath) && !string.IsNullOrEmpty(_typePath) && !string.IsNullOrEmpty(_genrePath))
             {
                 LibraryPath = string.Concat(BaseLibraryPath, @"\", _statusPath, @"\", _typePath, @"\", _genrePath, @"\");
             }
@@ -201,6 +234,24 @@ namespace Dj.Categorisa.Models
             set
             {
                 _isGenreGirlPowerSelected = value;
+                UpdateLibraryPath();
+            }
+        }
+        public bool IsGenreCountrySelected
+        {
+            get { return _isGenreCountrySelected; }
+            set
+            {
+                _isGenreCountrySelected = value;
+                UpdateLibraryPath();
+            }
+        }
+        public bool IsGenreFunkSelected
+        {
+            get { return _isGenreFunkSelected; }
+            set
+            {
+                _isGenreFunkSelected = value;
                 UpdateLibraryPath();
             }
         }

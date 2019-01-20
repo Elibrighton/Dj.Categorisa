@@ -12,6 +12,9 @@
             <TextBox Text="{Binding SongPathTextBox}"></TextBox>
         </DockPanel>
         <StackPanel Orientation="Horizontal">
+            <CheckBox IsChecked="{Binding IsPersonalFavouriteCheckboxChecked}">Is personal favourite</CheckBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
             <Label>Status:</Label>
             <RadioButton GroupName="Status" Content="Unprocessed" IsChecked="{Binding IsStatusUnprocessedRadioButtonChecked}" />
             <RadioButton GroupName="Status" Content="Processed" IsChecked="{Binding IsStatusProcessedRadioButtonChecked}" />
@@ -32,15 +35,14 @@
                 <ComboBoxItem IsSelected="{Binding IsGenreChillComboBoxItemSelected}">Chill</ComboBoxItem>
                 <ComboBoxItem IsSelected="{Binding IsGenreDanceComboBoxItemSelected}">Dance</ComboBoxItem>
                 <ComboBoxItem IsSelected="{Binding IsGenreGirlPowerComboBoxItemSelected}">Girl power</ComboBoxItem>
+                <ComboBoxItem IsSelected="{Binding IsGenreCountryComboBoxItemSelected}">Country</ComboBoxItem>
+                <ComboBoxItem IsSelected="{Binding IsGenreFunkComboBoxItemSelected}">Funk</ComboBoxItem>
             </ComboBox>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <CheckBox IsChecked="{Binding IsPersonalFavouriteCheckboxChecked}">Is personal favourite</CheckBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label>Library path:</Label>
             <TextBlock Text="{Binding LibraryPathTextBlock, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
-        <Button Command="{Binding MoveButtonCommand}">Move</Button>
+        <Button Command="{Binding CopyButtonCommand}">Copy</Button>
     </StackPanel>
 </Window>

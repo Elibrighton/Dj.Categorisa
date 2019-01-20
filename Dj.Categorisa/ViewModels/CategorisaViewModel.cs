@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Dj.Categorisa.ViewModels
@@ -16,12 +17,42 @@ namespace Dj.Categorisa.ViewModels
         public CategorisaViewModel(ICategorisaModel categorisaModel)
         {
             _categorisaModel = categorisaModel;
-            MoveButtonCommand = new RelayCommand(OnMoveButtonCommand);
+            CopyButtonCommand = new RelayCommand(OnCopyButtonCommand);
         }
 
-        internal void Move()
+        internal void Reset()
         {
+            SongPathTextBox = "";
+            IsStatusUnprocessedRadioButtonChecked = true;
+            IsTypeRemixRadioButtonChecked = true;
+            IsPersonalFavouriteCheckboxChecked = false;
+            ResetGenreComboBox();
+            _categorisaModel.Reset();
+        }
 
+        internal void Copy()
+        {
+            var isCopied = _categorisaModel.Copy();
+            MessageBox.Show(string.Concat("Song ", isCopied ? "copied" : "did not copy", " successfully."));
+
+            if (isCopied)
+            {
+                Reset();
+            }
+        }
+
+        internal void ResetGenreComboBox()
+        {
+            IsGenreRnbComboBoxItemSelected = false;
+            IsGenrePopComboBoxItemSelected = false;
+            IsGenreHipHopComboBoxItemSelected = false;
+            IsGenreUrbanComboBoxItemSelected = false;
+            IsGenreSleeperComboBoxItemSelected = false;
+            IsGenreChillComboBoxItemSelected = false;
+            IsGenreDanceComboBoxItemSelected = false;
+            IsGenreGirlPowerComboBoxItemSelected = false;
+            IsGenreCountryComboBoxItemSelected = false;
+            IsGenreFunkComboBoxItemSelected = false;
         }
 
         internal void UpdateLibraryPath()
@@ -30,11 +61,11 @@ namespace Dj.Categorisa.ViewModels
             LibraryPathTextBlock = _categorisaModel.LibraryPath;
         }
 
-        public ICommand MoveButtonCommand { get; set; }
+        public ICommand CopyButtonCommand { get; set; }
 
-        private async void OnMoveButtonCommand(object param)
+        private async void OnCopyButtonCommand(object param)
         {
-            await Task.Run(() => Move());
+            await Task.Run(() => Copy());
         }
 
         public string SongPathTextBox
@@ -179,12 +210,35 @@ namespace Dj.Categorisa.ViewModels
             }
         }
 
+        public bool IsGenreCountryComboBoxItemSelected
+        {
+            get { return _categorisaModel.IsGenreCountrySelected; }
+            set
+            {
+                _categorisaModel.IsGenreCountrySelected = value;
+                UpdateLibraryPath();
+                NotifyPropertyChanged("IsGenreCountryComboBoxItemSelected");
+            }
+        }
+
+        public bool IsGenreFunkComboBoxItemSelected
+        {
+            get { return _categorisaModel.IsGenreFunkSelected; }
+            set
+            {
+                _categorisaModel.IsGenreFunkSelected = value;
+                UpdateLibraryPath();
+                NotifyPropertyChanged("IsGenreFunkComboBoxItemSelected");
+            }
+        }
+
         public bool IsPersonalFavouriteCheckboxChecked
         {
             get { return _categorisaModel.IsPersonalFavouriteChecked; }
             set
             {
                 _categorisaModel.IsPersonalFavouriteChecked = value;
+                UpdateLibraryPath();
                 NotifyPropertyChanged("IsPersonalFavouriteCheckboxChecked");
             }
         }

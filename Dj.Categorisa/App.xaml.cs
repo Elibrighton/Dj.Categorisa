@@ -1,6 +1,7 @@
 ﻿using Dj.Categorisa.Models;
 using Dj.Categorisa.ViewModels;
 using Dj.Categorisa.Views;
+using SongHandlerInterface;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -23,7 +24,7 @@ namespace Dj.Categorisa
             IUnityContainer container = new UnityContainer();
             container.RegisterType<ICategorisaViewModel, CategorisaViewModel>();
             container.RegisterType<ICategorisaModel, CategorisaModel>();
-            //container.RegisterType<ICompany, Company>();
+            container.RegisterType<ISongHandler, SongHandler.SongHandler>();
 
             var window = container.Resolve<CategorisaView>();
             window.Show();

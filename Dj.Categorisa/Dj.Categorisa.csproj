@@ -131,5 +131,15 @@
   <ItemGroup>
     <Folder Include="Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SongHandlerInterface\SongHandlerInterface.csproj">
+      <Project>{d22b1717-fbb1-4ccb-8527-ed6b75ed2f4e}</Project>
+      <Name>SongHandlerInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SongHandler\SongHandler.csproj">
+      <Project>{82220b33-3515-41e8-9937-7450a1571cdc}</Project>
+      <Name>SongHandler</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

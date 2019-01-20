@@ -15,8 +15,12 @@
         bool IsGenreChillSelected { get; set; }
         bool IsGenreDanceSelected { get; set; }
         bool IsGenreGirlPowerSelected { get; set; }
+        bool IsGenreCountrySelected { get; set; }
+        bool IsGenreFunkSelected { get; set; }
         bool IsPersonalFavouriteChecked { get; set; }
         string LibraryPath { get; set; }
         void UpdateLibraryPath();
+        bool Copy();
+        void Reset();
     }
 }
