@@ -1,15 +1,15 @@
-﻿<Window x:Class="Dj.Categorisa.MainWindow"
+﻿<Window x:Class="Dj.Categorisa.Views.CategorisaView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dj.Categorisa"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Dj.Categorisa" Height="450" Width="800">
     <StackPanel>
         <DockPanel LastChildFill="True">
             <Label>Enter song path:</Label>
-            <TextBox></TextBox>
+            <TextBox Text="{Binding SongPathTextBox}"></TextBox>
         </DockPanel>
         <StackPanel Orientation="Horizontal">
             <Label>Status:</Label>

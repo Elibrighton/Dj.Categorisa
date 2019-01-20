@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Dj.Categorisa
+namespace Dj.Categorisa.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CategorisaView : Window
     {
-        public MainWindow()
+        public CategorisaView()
         {
             InitializeComponent();
         }
