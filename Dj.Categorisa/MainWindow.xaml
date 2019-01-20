@@ -6,7 +6,33 @@
         xmlns:local="clr-namespace:Dj.Categorisa"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <DockPanel LastChildFill="True">
+            <Label>Enter song path:</Label>
+            <TextBox></TextBox>
+        </DockPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label>Status:</Label>
+            <RadioButton GroupName="Status" Content="Unprocessed" IsChecked="True"/>
+            <RadioButton GroupName="Status" Content="Processed" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label>Type:</Label>
+            <RadioButton GroupName="Type" Content="Remix" IsChecked="True" />
+            <RadioButton GroupName="Type" Content="Original" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label>Genre:</Label>
+            <ComboBox>
+                <ComboBoxItem>RnB</ComboBoxItem>
+                <ComboBoxItem>Pop</ComboBoxItem>
+                <ComboBoxItem>Hip hop</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <CheckBox>Is personal favourite</CheckBox>
+        </StackPanel>
+        <Label>Library path:</Label>
+        <Button>Move</Button>
+    </StackPanel>
 </Window>
