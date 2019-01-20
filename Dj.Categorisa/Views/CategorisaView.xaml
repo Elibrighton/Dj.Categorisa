@@ -13,26 +13,34 @@
         </DockPanel>
         <StackPanel Orientation="Horizontal">
             <Label>Status:</Label>
-            <RadioButton GroupName="Status" Content="Unprocessed" IsChecked="True"/>
-            <RadioButton GroupName="Status" Content="Processed" />
+            <RadioButton GroupName="Status" Content="Unprocessed" IsChecked="{Binding IsStatusUnprocessedRadioButtonChecked}" />
+            <RadioButton GroupName="Status" Content="Processed" IsChecked="{Binding IsStatusProcessedRadioButtonChecked}" />
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label>Type:</Label>
-            <RadioButton GroupName="Type" Content="Remix" IsChecked="True" />
-            <RadioButton GroupName="Type" Content="Original" />
+            <RadioButton GroupName="Type" Content="Remix" IsChecked="{Binding IsTypeRemixRadioButtonChecked}" />
+            <RadioButton GroupName="Type" Content="Original" IsChecked="{Binding IsTypeOriginalRadioButtonChecked}" />
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label>Genre:</Label>
             <ComboBox>
-                <ComboBoxItem>RnB</ComboBoxItem>
-                <ComboBoxItem>Pop</ComboBoxItem>
-                <ComboBoxItem>Hip hop</ComboBoxItem>
+                <ComboBoxItem IsSelected="{Binding IsGenreRnbComboBoxItemSelected}">RnB</ComboBoxItem>
+                <ComboBoxItem IsSelected="{Binding IsGenrePopComboBoxItemSelected}">Pop</ComboBoxItem>
+                <ComboBoxItem IsSelected="{Binding IsGenreHipHopComboBoxItemSelected}">Hip hop</ComboBoxItem>
+                <ComboBoxItem IsSelected="{Binding IsGenreUrbanComboBoxItemSelected}">Urban</ComboBoxItem>
+                <ComboBoxItem IsSelected="{Binding IsGenreSleeperComboBoxItemSelected}">Sleeper</ComboBoxItem>
+                <ComboBoxItem IsSelected="{Binding IsGenreChillComboBoxItemSelected}">Chill</ComboBoxItem>
+                <ComboBoxItem IsSelected="{Binding IsGenreDanceComboBoxItemSelected}">Dance</ComboBoxItem>
+                <ComboBoxItem IsSelected="{Binding IsGenreGirlPowerComboBoxItemSelected}">Girl power</ComboBoxItem>
             </ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <CheckBox>Is personal favourite</CheckBox>
+            <CheckBox IsChecked="{Binding IsPersonalFavouriteCheckboxChecked}">Is personal favourite</CheckBox>
         </StackPanel>
-        <Label>Library path:</Label>
-        <Button>Move</Button>
+        <StackPanel Orientation="Horizontal">
+            <Label>Library path:</Label>
+            <TextBlock Text="{Binding LibraryPathTextBlock, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+        <Button Command="{Binding MoveButtonCommand}">Move</Button>
     </StackPanel>
 </Window>

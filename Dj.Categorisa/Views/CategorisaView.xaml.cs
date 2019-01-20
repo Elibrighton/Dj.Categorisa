@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dj.Categorisa.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace Dj.Categorisa.Views
     /// </summary>
     public partial class CategorisaView : Window
     {
-        public CategorisaView()
+        public CategorisaView(ICategorisaViewModel categorisaViewModel)
         {
             InitializeComponent();
+            DataContext = categorisaViewModel;
         }
     }
 }

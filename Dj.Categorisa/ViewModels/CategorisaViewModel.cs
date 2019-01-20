@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Dj.Categorisa.ViewModels
 {
@@ -15,6 +16,25 @@ namespace Dj.Categorisa.ViewModels
         public CategorisaViewModel(ICategorisaModel categorisaModel)
         {
             _categorisaModel = categorisaModel;
+            MoveButtonCommand = new RelayCommand(OnMoveButtonCommand);
+        }
+
+        internal void Move()
+        {
+
+        }
+
+        internal void UpdateLibraryPath()
+        {
+            _categorisaModel.UpdateLibraryPath();
+            LibraryPathTextBlock = _categorisaModel.LibraryPath;
+        }
+
+        public ICommand MoveButtonCommand { get; set; }
+
+        private async void OnMoveButtonCommand(object param)
+        {
+            await Task.Run(() => Move());
         }
 
         public string SongPathTextBox
@@ -24,6 +44,158 @@ namespace Dj.Categorisa.ViewModels
             {
                 _categorisaModel.SongPath = value;
                 NotifyPropertyChanged("SongPathTextBox");
+            }
+        }
+
+        public bool IsStatusUnprocessedRadioButtonChecked
+        {
+            get { return _categorisaModel.IsStatusUnprocessedChecked; }
+            set
+            {
+                _categorisaModel.IsStatusUnprocessedChecked = value;
+                UpdateLibraryPath();
+                NotifyPropertyChanged("IsStatusUnprocessedRadioButtonChecked");
+            }
+        }
+
+        public bool IsStatusProcessedRadioButtonChecked
+        {
+            get { return _categorisaModel.IsStatusProcessedChecked; }
+            set
+            {
+                _categorisaModel.IsStatusProcessedChecked = value;
+                UpdateLibraryPath();
+                NotifyPropertyChanged("IsStatusProcessedRadioButtonChecked");
+            }
+        }
+
+        public bool IsTypeRemixRadioButtonChecked
+        {
+            get { return _categorisaModel.IsTypeRemixChecked; }
+            set
+            {
+                _categorisaModel.IsTypeRemixChecked = value;
+                UpdateLibraryPath();
+                NotifyPropertyChanged("IsTypeRemixRadioButtonChecked");
+            }
+        }
+
+        public bool IsTypeOriginalRadioButtonChecked
+        {
+            get { return _categorisaModel.IsTypeOriginalChecked; }
+            set
+            {
+                _categorisaModel.IsTypeOriginalChecked = value;
+                UpdateLibraryPath();
+                NotifyPropertyChanged("IsTypeOriginalRadioButtonChecked");
+            }
+        }
+
+        public bool IsGenreRnbComboBoxItemSelected
+        {
+            get { return _categorisaModel.IsGenreRnbSelected; }
+            set
+            {
+                _categorisaModel.IsGenreRnbSelected = value;
+                UpdateLibraryPath();
+                NotifyPropertyChanged("IsGenreRnbComboBoxItemSelected");
+            }
+        }
+
+        public bool IsGenrePopComboBoxItemSelected
+        {
+            get { return _categorisaModel.IsGenrePopSelected; }
+            set
+            {
+                _categorisaModel.IsGenrePopSelected = value;
+                UpdateLibraryPath();
+                NotifyPropertyChanged("IsGenrePopComboBoxItemSelected");
+            }
+        }
+
+        public bool IsGenreHipHopComboBoxItemSelected
+        {
+            get { return _categorisaModel.IsGenreHipHopSelected; }
+            set
+            {
+                _categorisaModel.IsGenreHipHopSelected = value;
+                UpdateLibraryPath();
+                NotifyPropertyChanged("IsGenreHipHopComboBoxItemSelected");
+            }
+        }
+
+        public bool IsGenreUrbanComboBoxItemSelected
+        {
+            get { return _categorisaModel.IsGenreUrbanSelected; }
+            set
+            {
+                _categorisaModel.IsGenreUrbanSelected = value;
+                UpdateLibraryPath();
+                NotifyPropertyChanged("IsGenreUrbanComboBoxItemSelected");
+            }
+        }
+
+        public bool IsGenreSleeperComboBoxItemSelected
+        {
+            get { return _categorisaModel.IsGenreSleeperSelected; }
+            set
+            {
+                _categorisaModel.IsGenreSleeperSelected = value;
+                UpdateLibraryPath();
+                NotifyPropertyChanged("IsGenreSleeperComboBoxItemSelected");
+            }
+        }
+
+        public bool IsGenreChillComboBoxItemSelected
+        {
+            get { return _categorisaModel.IsGenreChillSelected; }
+            set
+            {
+                _categorisaModel.IsGenreChillSelected = value;
+                UpdateLibraryPath();
+                NotifyPropertyChanged("IsGenreChillComboBoxItemSelected");
+            }
+        }
+
+        public bool IsGenreDanceComboBoxItemSelected
+        {
+            get { return _categorisaModel.IsGenreDanceSelected; }
+            set
+            {
+                _categorisaModel.IsGenreDanceSelected = value;
+                UpdateLibraryPath();
+                NotifyPropertyChanged("IsGenreDanceComboBoxItemSelected");
+            }
+        }
+
+        public bool IsGenreGirlPowerComboBoxItemSelected
+        {
+            get { return _categorisaModel.IsGenreGirlPowerSelected; }
+            set
+            {
+                _categorisaModel.IsGenreGirlPowerSelected = value;
+                UpdateLibraryPath();
+                NotifyPropertyChanged("IsGenreGirlPowerComboBoxItemSelected");
+            }
+        }
+
+        public bool IsPersonalFavouriteCheckboxChecked
+        {
+            get { return _categorisaModel.IsPersonalFavouriteChecked; }
+            set
+            {
+                _categorisaModel.IsPersonalFavouriteChecked = value;
+                NotifyPropertyChanged("IsPersonalFavouriteCheckboxChecked");
+            }
+        }
+
+        public string LibraryPathTextBlock
+        {
+            get { return _categorisaModel.LibraryPath; }
+            set
+            {
+                _categorisaModel.LibraryPath = value;
+                NotifyPropertyChanged("LibraryPathTextBlock");
             }
         }
     }
