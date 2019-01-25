@@ -16,9 +16,10 @@ namespace Dj.Categorisa.Models
         private string _typePath;
         private string _genrePath;
         private bool _isStatusUnprocessedChecked;
-        private bool _isStatusProcessedChecked;
+        private bool _isStatusSelectionsChecked;
         private bool _isTypeRemixChecked;
         private bool _isTypeOriginalChecked;
+        private bool _isTypePersonalFavouriteChecked;
         private bool _isGenreRnbSelected;
         private bool _isGenrePopSelected;
         private bool _isGenreHipHopSelected;
@@ -29,6 +30,7 @@ namespace Dj.Categorisa.Models
         private bool _isGenreGirlPowerSelected;
         private bool _isGenreCountrySelected;
         private bool _isGenreFunkSelected;
+        private bool _isGenreRockSelected;
         private ISongHandler _songHandler;
 
         public CategorisaModel(ISongHandler songHandler)
@@ -36,6 +38,7 @@ namespace Dj.Categorisa.Models
             _songHandler = songHandler;
             IsStatusUnprocessedChecked = true;
             IsTypeRemixChecked = true;
+            IsCopyEnabled = false;
             Reset();
             UpdateLibraryPath();
         }
@@ -86,17 +89,23 @@ namespace Dj.Categorisa.Models
 
         internal void UpdateStatusPath()
         {
-            _statusPath = IsStatusUnprocessedChecked ? "Unprocessed" : "Processed";
-
-            if (IsPersonalFavouriteChecked)
-            {
-                _statusPath += string.Concat(@"\", "Personal favourite");
-            }
+            _statusPath = IsStatusUnprocessedChecked ? "Unprocessed" : "Selections";
         }
 
         internal void UpdateTypePath()
         {
-            _typePath = IsTypeRemixChecked ? "Remix" : "Original";
+            if (IsTypeRemixChecked)
+            {
+                _typePath = "Remix";
+            }
+            else if (IsTypeOriginalChecked)
+            {
+                _typePath = "Original";
+            }
+            else
+            {
+                _typePath = "Personal favourite";
+            }
         }
 
         public void Reset()
@@ -118,11 +127,11 @@ namespace Dj.Categorisa.Models
             UpdateTypePath();
             UpdateGenrePath();
 
-            if (IsPersonalFavouriteChecked && !string.IsNullOrEmpty(_statusPath))
+            if (!string.IsNullOrEmpty(_statusPath) && !string.IsNullOrEmpty(_typePath) && IsTypePersonalFavouriteChecked)
             {
-                LibraryPath = string.Concat(BaseLibraryPath, @"\", _statusPath, @"\");
+                LibraryPath = string.Concat(BaseLibraryPath, @"\", _statusPath, @"\", _typePath, @"\");
             }
-            else if (!string.IsNullOrEmpty(_statusPath) && !string.IsNullOrEmpty(_typePath) && !string.IsNullOrEmpty(_genrePath))
+               else if (!string.IsNullOrEmpty(_statusPath) && !string.IsNullOrEmpty(_typePath) && !string.IsNullOrEmpty(_genrePath))
             {
                 LibraryPath = string.Concat(BaseLibraryPath, @"\", _statusPath, @"\", _typePath, @"\", _genrePath, @"\");
             }
@@ -138,12 +147,12 @@ namespace Dj.Categorisa.Models
                 UpdateLibraryPath();
             }
         }
-        public bool IsStatusProcessedChecked
+        public bool IsStatusSelectionsChecked
         {
-            get { return _isStatusProcessedChecked; }
+            get { return _isStatusSelectionsChecked; }
             set
             {
-                _isStatusProcessedChecked = value;
+                _isStatusSelectionsChecked = value;
                 UpdateLibraryPath();
             }
         }
@@ -162,6 +171,15 @@ namespace Dj.Categorisa.Models
             set
             {
                 _isTypeOriginalChecked = value;
+                UpdateLibraryPath();
+            }
+        }
+        public bool IsTypePersonalFavouriteChecked
+        {
+            get { return _isTypePersonalFavouriteChecked; }
+            set
+            {
+                _isTypePersonalFavouriteChecked = value;
                 UpdateLibraryPath();
             }
         }
@@ -255,7 +273,16 @@ namespace Dj.Categorisa.Models
                 UpdateLibraryPath();
             }
         }
-        public bool IsPersonalFavouriteChecked { get; set; }
+        public bool IsGenreRockSelected
+        {
+            get { return _isGenreRockSelected; }
+            set
+            {
+                _isGenreRockSelected = value;
+                UpdateLibraryPath();
+            }
+        }
         public string LibraryPath { get; set; }
+        public bool IsCopyEnabled { get; set; }
     }
 }

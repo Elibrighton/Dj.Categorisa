@@ -20,12 +20,31 @@ namespace Dj.Categorisa.ViewModels
             CopyButtonCommand = new RelayCommand(OnCopyButtonCommand);
         }
 
+        internal void EnableCopyButton()
+        {
+            IsCopyButtonEnabled = !string.IsNullOrEmpty(SongPathTextBox) && AnyGenreSelected();
+        }
+
+        internal bool AnyGenreSelected()
+        {
+            return (IsGenreRnbComboBoxItemSelected
+                    || IsGenrePopComboBoxItemSelected
+                    || IsGenreHipHopComboBoxItemSelected
+                    || IsGenreUrbanComboBoxItemSelected
+                    || IsGenreSleeperComboBoxItemSelected
+                    || IsGenreChillComboBoxItemSelected
+                    || IsGenreDanceComboBoxItemSelected
+                    || IsGenreGirlPowerComboBoxItemSelected
+                    || IsGenreCountryComboBoxItemSelected
+                    || IsGenreFunkComboBoxItemSelected
+                    || IsGenreRockComboBoxItemSelected);
+        }
+
         internal void Reset()
         {
             SongPathTextBox = "";
             IsStatusUnprocessedRadioButtonChecked = true;
             IsTypeRemixRadioButtonChecked = true;
-            IsPersonalFavouriteCheckboxChecked = false;
             ResetGenreComboBox();
             _categorisaModel.Reset();
         }
@@ -53,6 +72,7 @@ namespace Dj.Categorisa.ViewModels
             IsGenreGirlPowerComboBoxItemSelected = false;
             IsGenreCountryComboBoxItemSelected = false;
             IsGenreFunkComboBoxItemSelected = false;
+            IsGenreRockComboBoxItemSelected = false;
         }
 
         internal void UpdateLibraryPath()
@@ -74,6 +94,7 @@ namespace Dj.Categorisa.ViewModels
             set
             {
                 _categorisaModel.SongPath = value;
+                EnableCopyButton();
                 NotifyPropertyChanged("SongPathTextBox");
             }
         }
@@ -89,14 +110,14 @@ namespace Dj.Categorisa.ViewModels
             }
         }
 
-        public bool IsStatusProcessedRadioButtonChecked
+        public bool IsStatusSelectionsRadioButtonChecked
         {
-            get { return _categorisaModel.IsStatusProcessedChecked; }
+            get { return _categorisaModel.IsStatusSelectionsChecked; }
             set
             {
-                _categorisaModel.IsStatusProcessedChecked = value;
+                _categorisaModel.IsStatusSelectionsChecked = value;
                 UpdateLibraryPath();
-                NotifyPropertyChanged("IsStatusProcessedRadioButtonChecked");
+                NotifyPropertyChanged("IsStatusSelectionsRadioButtonChecked");
             }
         }
 
@@ -122,6 +143,17 @@ namespace Dj.Categorisa.ViewModels
             }
         }
 
+        public bool IsTypePersonalFavouriteRadioButtonChecked
+        {
+            get { return _categorisaModel.IsTypePersonalFavouriteChecked; }
+            set
+            {
+                _categorisaModel.IsTypePersonalFavouriteChecked = value;
+                UpdateLibraryPath();
+                NotifyPropertyChanged("IsTypePersonalFavouriteRadioButtonChecked");
+            }
+        }
+
         public bool IsGenreRnbComboBoxItemSelected
         {
             get { return _categorisaModel.IsGenreRnbSelected; }
@@ -129,6 +161,7 @@ namespace Dj.Categorisa.ViewModels
             {
                 _categorisaModel.IsGenreRnbSelected = value;
                 UpdateLibraryPath();
+                EnableCopyButton();
                 NotifyPropertyChanged("IsGenreRnbComboBoxItemSelected");
             }
         }
@@ -140,6 +173,7 @@ namespace Dj.Categorisa.ViewModels
             {
                 _categorisaModel.IsGenrePopSelected = value;
                 UpdateLibraryPath();
+                EnableCopyButton();
                 NotifyPropertyChanged("IsGenrePopComboBoxItemSelected");
             }
         }
@@ -151,6 +185,7 @@ namespace Dj.Categorisa.ViewModels
             {
                 _categorisaModel.IsGenreHipHopSelected = value;
                 UpdateLibraryPath();
+                EnableCopyButton();
                 NotifyPropertyChanged("IsGenreHipHopComboBoxItemSelected");
             }
         }
@@ -162,6 +197,7 @@ namespace Dj.Categorisa.ViewModels
             {
                 _categorisaModel.IsGenreUrbanSelected = value;
                 UpdateLibraryPath();
+                EnableCopyButton();
                 NotifyPropertyChanged("IsGenreUrbanComboBoxItemSelected");
             }
         }
@@ -173,6 +209,7 @@ namespace Dj.Categorisa.ViewModels
             {
                 _categorisaModel.IsGenreSleeperSelected = value;
                 UpdateLibraryPath();
+                EnableCopyButton();
                 NotifyPropertyChanged("IsGenreSleeperComboBoxItemSelected");
             }
         }
@@ -184,6 +221,7 @@ namespace Dj.Categorisa.ViewModels
             {
                 _categorisaModel.IsGenreChillSelected = value;
                 UpdateLibraryPath();
+                EnableCopyButton();
                 NotifyPropertyChanged("IsGenreChillComboBoxItemSelected");
             }
         }
@@ -195,6 +233,7 @@ namespace Dj.Categorisa.ViewModels
             {
                 _categorisaModel.IsGenreDanceSelected = value;
                 UpdateLibraryPath();
+                EnableCopyButton();
                 NotifyPropertyChanged("IsGenreDanceComboBoxItemSelected");
             }
         }
@@ -206,6 +245,7 @@ namespace Dj.Categorisa.ViewModels
             {
                 _categorisaModel.IsGenreGirlPowerSelected = value;
                 UpdateLibraryPath();
+                EnableCopyButton();
                 NotifyPropertyChanged("IsGenreGirlPowerComboBoxItemSelected");
             }
         }
@@ -217,6 +257,7 @@ namespace Dj.Categorisa.ViewModels
             {
                 _categorisaModel.IsGenreCountrySelected = value;
                 UpdateLibraryPath();
+                EnableCopyButton();
                 NotifyPropertyChanged("IsGenreCountryComboBoxItemSelected");
             }
         }
@@ -228,18 +269,20 @@ namespace Dj.Categorisa.ViewModels
             {
                 _categorisaModel.IsGenreFunkSelected = value;
                 UpdateLibraryPath();
+                EnableCopyButton();
                 NotifyPropertyChanged("IsGenreFunkComboBoxItemSelected");
             }
         }
 
-        public bool IsPersonalFavouriteCheckboxChecked
+        public bool IsGenreRockComboBoxItemSelected
         {
-            get { return _categorisaModel.IsPersonalFavouriteChecked; }
+            get { return _categorisaModel.IsGenreRockSelected; }
             set
             {
-                _categorisaModel.IsPersonalFavouriteChecked = value;
+                _categorisaModel.IsGenreRockSelected = value;
                 UpdateLibraryPath();
-                NotifyPropertyChanged("IsPersonalFavouriteCheckboxChecked");
+                EnableCopyButton();
+                NotifyPropertyChanged("IsGenreRockComboBoxItemSelected");
             }
         }
 
@@ -250,6 +293,16 @@ namespace Dj.Categorisa.ViewModels
             {
                 _categorisaModel.LibraryPath = value;
                 NotifyPropertyChanged("LibraryPathTextBlock");
+            }
+        }
+
+        public bool IsCopyButtonEnabled
+        {
+            get { return _categorisaModel.IsCopyEnabled; }
+            set
+            {
+                _categorisaModel.IsCopyEnabled = value;
+                NotifyPropertyChanged("IsCopyButtonEnabled");
             }
         }
     }

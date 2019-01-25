@@ -12,17 +12,15 @@
             <TextBox Text="{Binding SongPathTextBox}"></TextBox>
         </DockPanel>
         <StackPanel Orientation="Horizontal">
-            <CheckBox IsChecked="{Binding IsPersonalFavouriteCheckboxChecked}">Is personal favourite</CheckBox>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
             <Label>Status:</Label>
             <RadioButton GroupName="Status" Content="Unprocessed" IsChecked="{Binding IsStatusUnprocessedRadioButtonChecked}" />
-            <RadioButton GroupName="Status" Content="Processed" IsChecked="{Binding IsStatusProcessedRadioButtonChecked}" />
+            <RadioButton GroupName="Status" Content="Selections" IsChecked="{Binding IsStatusSelectionsRadioButtonChecked}" />
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label>Type:</Label>
             <RadioButton GroupName="Type" Content="Remix" IsChecked="{Binding IsTypeRemixRadioButtonChecked}" />
             <RadioButton GroupName="Type" Content="Original" IsChecked="{Binding IsTypeOriginalRadioButtonChecked}" />
+            <RadioButton GroupName="Type" Content="Personal favourite" IsChecked="{Binding IsTypePersonalFavouriteRadioButtonChecked}" />
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label>Genre:</Label>
@@ -37,12 +35,13 @@
                 <ComboBoxItem IsSelected="{Binding IsGenreGirlPowerComboBoxItemSelected}">Girl power</ComboBoxItem>
                 <ComboBoxItem IsSelected="{Binding IsGenreCountryComboBoxItemSelected}">Country</ComboBoxItem>
                 <ComboBoxItem IsSelected="{Binding IsGenreFunkComboBoxItemSelected}">Funk</ComboBoxItem>
+                <ComboBoxItem IsSelected="{Binding IsGenreRockComboBoxItemSelected}">Rock</ComboBoxItem>
             </ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label>Library path:</Label>
             <TextBlock Text="{Binding LibraryPathTextBlock, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
-        <Button Command="{Binding CopyButtonCommand}">Copy</Button>
+        <Button Command="{Binding CopyButtonCommand}" IsEnabled="{Binding IsCopyButtonEnabled}">Copy</Button>
     </StackPanel>
 </Window>
