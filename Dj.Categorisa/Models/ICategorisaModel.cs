@@ -19,6 +19,7 @@
         bool IsGenreCountrySelected { get; set; }
         bool IsGenreFunkSelected { get; set; }
         bool IsGenreRockSelected { get; set; }
+        bool IsGenreMoombahtonSelected { get; set; }
         string LibraryPath { get; set; }
         void UpdateLibraryPath();
         bool Copy();

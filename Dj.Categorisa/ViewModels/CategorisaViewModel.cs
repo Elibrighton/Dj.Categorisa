@@ -37,7 +37,8 @@ namespace Dj.Categorisa.ViewModels
                     || IsGenreGirlPowerComboBoxItemSelected
                     || IsGenreCountryComboBoxItemSelected
                     || IsGenreFunkComboBoxItemSelected
-                    || IsGenreRockComboBoxItemSelected);
+                    || IsGenreRockComboBoxItemSelected
+                    || IsGenreMoombahtonComboBoxItemSelected);
         }
 
         internal void Reset()
@@ -73,6 +74,7 @@ namespace Dj.Categorisa.ViewModels
             IsGenreCountryComboBoxItemSelected = false;
             IsGenreFunkComboBoxItemSelected = false;
             IsGenreRockComboBoxItemSelected = false;
+            IsGenreMoombahtonComboBoxItemSelected = false;
         }
 
         internal void UpdateLibraryPath()
@@ -283,6 +285,18 @@ namespace Dj.Categorisa.ViewModels
                 UpdateLibraryPath();
                 EnableCopyButton();
                 NotifyPropertyChanged("IsGenreRockComboBoxItemSelected");
+            }
+        }
+
+        public bool IsGenreMoombahtonComboBoxItemSelected
+        {
+            get { return _categorisaModel.IsGenreMoombahtonSelected; }
+            set
+            {
+                _categorisaModel.IsGenreMoombahtonSelected = value;
+                UpdateLibraryPath();
+                EnableCopyButton();
+                NotifyPropertyChanged("IsGenreMoombahtonComboBoxItemSelected");
             }
         }
 

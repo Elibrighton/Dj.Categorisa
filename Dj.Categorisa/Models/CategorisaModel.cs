@@ -31,6 +31,7 @@ namespace Dj.Categorisa.Models
         private bool _isGenreCountrySelected;
         private bool _isGenreFunkSelected;
         private bool _isGenreRockSelected;
+        private bool _isGenreMoombahtonSelected;
         private ISongHandler _songHandler;
 
         public CategorisaModel(ISongHandler songHandler)
@@ -84,6 +85,14 @@ namespace Dj.Categorisa.Models
             else if (IsGenreFunkSelected)
             {
                 _genrePath = "Funk";
+            }
+            else if (IsGenreRockSelected)
+            {
+                _genrePath = "Rock";
+            }
+            else if (IsGenreMoombahtonSelected)
+            {
+                _genrePath = "Moombahton";
             }
         }
 
@@ -279,6 +288,15 @@ namespace Dj.Categorisa.Models
             set
             {
                 _isGenreRockSelected = value;
+                UpdateLibraryPath();
+            }
+        }
+        public bool IsGenreMoombahtonSelected
+        {
+            get { return _isGenreMoombahtonSelected; }
+            set
+            {
+                _isGenreMoombahtonSelected = value;
                 UpdateLibraryPath();
             }
         }

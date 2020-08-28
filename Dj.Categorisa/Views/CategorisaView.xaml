@@ -36,6 +36,7 @@
                 <ComboBoxItem IsSelected="{Binding IsGenreCountryComboBoxItemSelected}">Country</ComboBoxItem>
                 <ComboBoxItem IsSelected="{Binding IsGenreFunkComboBoxItemSelected}">Funk</ComboBoxItem>
                 <ComboBoxItem IsSelected="{Binding IsGenreRockComboBoxItemSelected}">Rock</ComboBoxItem>
+                <ComboBoxItem IsSelected="{Binding IsGenreMoombahtonComboBoxItemSelected}">Moombahton</ComboBoxItem>
             </ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
